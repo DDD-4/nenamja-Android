@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Volunteer</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="baseUrl">https://dev.soe.vcp.lotte.com</string>
+</resources>
