@@ -11,9 +11,9 @@ import io.reactivex.Observable
 * @VERSION
 * @DATE 2020/07/25 1:19 PM
 **/
-class NenamjaRemoteDataSource(val mContext: Context?) {
+class NenamjaRemoteDataSource() {
     val nenamjaList: Observable<NenamjaResponse<NenamjaListResponse>>
-        get() = NenamjaClient<Any>(mContext).provideService(NenamjaServiceApi::class.java)
+        get() = NenamjaClient().provideService(NenamjaServiceApi::class.java)
             .memoList
 
 }

@@ -2,12 +2,9 @@ package com.nenamja.volunteer.ui.home
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import com.nenamja.volunteer.R
+import com.nenamja.volunteer.ui.base.BaseFragment
 import com.nenamja.volunteer.data.Memo
 
 /**
@@ -16,17 +13,16 @@ import com.nenamja.volunteer.data.Memo
  * @VERSION
  * @DATE 2020/07/25 1:24 PM
  **/
-class HomeFragment : Fragment(), HomeContract.ViewForFragment {
+class HomeFragment :
+    BaseFragment<HomeContract.ViewForFragment, HomeContract.PresenterForFragment>(R.layout.fragment_home),
+    HomeContract.ViewForFragment {
 
-    private var mPresenter: HomeContract.PresenterForFragment? = null
+//    private var mPresenter: HomeContract.PresenterForFragment? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        return root
+    override val presenter = HomePresenter()
+
+    override fun doViewCreated(view: View, savedInstanceState: Bundle?) {
+        //TODO : ㄱㅣ존의 View Creted에서 하는 작업을 넣으면 됩니다. 레이아웃 초기화등
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -36,13 +32,13 @@ class HomeFragment : Fragment(), HomeContract.ViewForFragment {
 
     override fun onResume() {
         super.onResume()
-        HomePresenter(this)
-        mPresenter?.subscribe()
+//        HomePresenter(this)
+        presenter.subscribe()
     }
 
     override fun onPause() {
         super.onPause()
-        mPresenter?.unsubscribe()
+        presenter.unsubscribe()
     }
 
     override fun getCurrentActivity(): Context {
@@ -58,7 +54,7 @@ class HomeFragment : Fragment(), HomeContract.ViewForFragment {
     }
 
     override fun loadMemoList() {
-        mPresenter!!.loadMemoList("")
+        presenter.loadMemoList("")
     }
 
     override fun updateMemoList(keyword: String?, memoList: ArrayList<Memo?>?) {
@@ -77,8 +73,4 @@ class HomeFragment : Fragment(), HomeContract.ViewForFragment {
         //TODO("Not yet implemented")
     }
 
-    override fun setPresenter(presenter: HomeContract.PresenterForFragment?) {
-        assert(presenter != null)
-        mPresenter = presenter
-    }
 }

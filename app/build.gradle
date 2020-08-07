@@ -40,6 +40,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "type"
+    productFlavors {
+        dev {
+            dimension "type"
+            buildConfigField "String", "BASE_URL", "\"http://apis.data.go.kr/1383000/YouthActivInfoVolSrvc/\""
+            buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl%2By6AB5mXcK2jpe5QJeuiJGXd0y01eQh%2BRi20dCCH4KSUs4dW7OK%2B6PPEGM6%2BUMqaQ%3D%3D\""
+        }
+        prod {
+            buildConfigField "String", "BASE_URL", "\"http://apis.data.go.kr/1383000/YouthActivInfoVolSrvc/\""
+            buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl%2By6AB5mXcK2jpe5QJeuiJGXd0y01eQh%2BRi20dCCH4KSUs4dW7OK%2B6PPEGM6%2BUMqaQ%3D%3D\""
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

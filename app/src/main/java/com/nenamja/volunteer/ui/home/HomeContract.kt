@@ -1,8 +1,7 @@
 package com.nenamja.volunteer.ui.home
 
 import android.content.Context
-import com.nenamja.volunteer.`interface`.BasePresenter
-import com.nenamja.volunteer.`interface`.BaseView
+import com.nenamja.volunteer.ui.base.BaseContract
 import com.nenamja.volunteer.data.Memo
 
 /**
@@ -17,17 +16,17 @@ interface HomeContract {
     /**
      * Home 뷰 화면과 관련된 presenter interface.
      */
-    interface PresenterForFragment{
+    interface PresenterForFragment : BaseContract.Presenter<ViewForFragment> {
 
         /**
          *
          */
-        fun subscribe()
+        override fun subscribe()
 
         /**
          *
          */
-        fun unsubscribe()
+        override fun unsubscribe()
 
 
         /**
@@ -56,7 +55,7 @@ interface HomeContract {
     /**
      * 메인 뷰 interface
      */
-    interface ViewForFragment {
+    interface ViewForFragment : BaseContract.View {
 
         /**
          * 현재 뷰(프레그먼트)가 속한 엑티비티를 반환한
@@ -109,7 +108,6 @@ interface HomeContract {
             memoId: String?
         )
 
-        fun setPresenter(presenter: HomeContract.PresenterForFragment?)
     }
 
 }

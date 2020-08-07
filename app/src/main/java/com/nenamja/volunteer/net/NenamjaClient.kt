@@ -1,6 +1,7 @@
 package com.nenamja.volunteer.net
 
 import android.content.Context
+import com.nenamja.volunteer.BuildConfig
 import com.nenamja.volunteer.R
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,8 +16,7 @@ import java.util.concurrent.TimeUnit
 * @VERSION
 * @DATE 2020/07/25 1:20 PM
 **/
-class NenamjaClient<T>(context: Context?) {
-    private val mBaseUrl: String = context?.resources?.getString(R.string.baseUrl)?:""
+class NenamjaClient {
 
     companion object {
         private const val CONNECT_TIMEOUT = 10000
@@ -28,7 +28,7 @@ class NenamjaClient<T>(context: Context?) {
 
     fun <T> provideService(service: Class<T>?): T {
         val ret =
-            Retrofit.Builder().baseUrl(mBaseUrl).client(provideHttpClient())
+            Retrofit.Builder().baseUrl(BuildConfig.BASE_URL).client(provideHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
                 .addConverterFactory(GsonConverterFactory.create()).build()
         return ret.create(service)
