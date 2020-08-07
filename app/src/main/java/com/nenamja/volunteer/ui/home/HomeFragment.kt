@@ -11,14 +11,14 @@ import com.nenamja.volunteer.R
 import com.nenamja.volunteer.data.Memo
 
 /**
-* HomeView
-* @AUTHOR 박기완
-* @VERSION
-* @DATE 2020/07/25 1:24 PM
-**/
+ * HomeView
+ * @AUTHOR 박기완
+ * @VERSION
+ * @DATE 2020/07/25 1:24 PM
+ **/
 class HomeFragment : Fragment(), HomeContract.ViewForFragment {
 
-    private var mPresenter: HomeContract.PresenterForFramgent? = null
+    private var mPresenter: HomeContract.PresenterForFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,8 +26,12 @@ class HomeFragment : Fragment(), HomeContract.ViewForFragment {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
     }
 
     override fun onResume() {
@@ -46,11 +50,11 @@ class HomeFragment : Fragment(), HomeContract.ViewForFragment {
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun dismissProgress() {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
     }
 
     override fun loadMemoList() {
@@ -58,22 +62,22 @@ class HomeFragment : Fragment(), HomeContract.ViewForFragment {
     }
 
     override fun updateMemoList(keyword: String?, memoList: ArrayList<Memo?>?) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun searchViewOn() {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
     }
 
     override fun drawLineAtScrollDown(isDraw: Boolean) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun updateMemoListAfterRemove(message: String?, memoId: String?) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
-    override fun setPresenter(presenter: HomeContract.PresenterForFramgent?) {
+    override fun setPresenter(presenter: HomeContract.PresenterForFragment?) {
         assert(presenter != null)
         mPresenter = presenter
     }

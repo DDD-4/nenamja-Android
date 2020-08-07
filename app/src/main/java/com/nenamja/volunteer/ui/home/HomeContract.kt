@@ -6,18 +6,30 @@ import com.nenamja.volunteer.`interface`.BaseView
 import com.nenamja.volunteer.data.Memo
 
 /**
-* Home View 와 Presenter
-* @AUTHOR 박기완
-* @VERSION
-* @DATE 2020/07/25 1:24 PM
-**/
+ * Home View 와 Presenter
+ * @AUTHOR 박기완
+ * @VERSION
+ * @DATE 2020/07/25 1:24 PM
+ **/
 
 interface HomeContract {
 
     /**
      * Home 뷰 화면과 관련된 presenter interface.
      */
-    interface PresenterForFramgent : BasePresenter {
+    interface PresenterForFragment{
+
+        /**
+         *
+         */
+        fun subscribe()
+
+        /**
+         *
+         */
+        fun unsubscribe()
+
+
         /**
          * 메모 저장 함수
          * @param memoId
@@ -44,13 +56,12 @@ interface HomeContract {
     /**
      * 메인 뷰 interface
      */
-    interface ViewForFragment :
-        BaseView<PresenterForFramgent?> {
+    interface ViewForFragment {
 
         /**
          * 현재 뷰(프레그먼트)가 속한 엑티비티를 반환한
          */
-        fun getCurrentActivity() : Context
+        fun getCurrentActivity(): Context
 
         /**
          * 진행바를 표시 한다.
@@ -97,6 +108,8 @@ interface HomeContract {
             message: String?,
             memoId: String?
         )
+
+        fun setPresenter(presenter: HomeContract.PresenterForFragment?)
     }
 
 }

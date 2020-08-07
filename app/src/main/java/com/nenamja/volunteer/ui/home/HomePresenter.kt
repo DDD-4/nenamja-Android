@@ -11,7 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 * @VERSION 
 * @DATE 2020/07/25 1:24 PM
 **/
-class HomePresenter(view:HomeFragment) : HomeContract.PresenterForFramgent {
+class HomePresenter(view:HomeFragment) : HomeContract.PresenterForFragment {
 
     var mView: HomeContract.ViewForFragment = view
     var mDataSource: NenamjaRemoteDataSource
@@ -55,18 +55,18 @@ class HomePresenter(view:HomeFragment) : HomeContract.PresenterForFramgent {
     }
 
     override fun remove(memoId: String?, position: Int) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun search(keyword: String?) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun subscribe() {
-        TODO("Not yet implemented")
+       // TODO("Not yet implemented")
     }
 
     override fun unsubscribe() {
-        TODO("Not yet implemented")
+       // TODO("Not yet implemented")
     }
 }
