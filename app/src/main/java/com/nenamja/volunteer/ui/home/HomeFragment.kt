@@ -57,7 +57,7 @@ class HomeFragment :
         presenter.loadMemoList("")
     }
 
-    override fun updateMemoList(keyword: String?, memoList: ArrayList<Memo?>?) {
+    override fun updateVolunteerList(keyword: String?, memoList: List<Any>) {
         //TODO("Not yet implemented")
     }
 

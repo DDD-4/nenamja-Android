@@ -82,9 +82,9 @@ interface HomeContract {
          * 메모 목록을 화면상에 업데이트 한다.
          * @param memoList
          */
-        fun updateMemoList(
+        fun updateVolunteerList(
             keyword: String?,
-            memoList: ArrayList<Memo?>?
+            memoList: List<Any>
         )
 
         /**

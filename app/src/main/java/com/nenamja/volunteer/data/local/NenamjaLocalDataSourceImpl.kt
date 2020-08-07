@@ -1,6 +1,6 @@
 package com.nenamja.volunteer.data.local
 
-import android.content.Context
+import com.nenamja.volunteer.data.local.source.NenamjaLocalDataSource
 
 /**
  * local 에서 다루는 data model
@@ -11,5 +11,5 @@ import android.content.Context
  * @DATE
  **/
 
-class NenamjaLocalDataSource(context: Context) {
+class NenamjaLocalDataSourceImpl() : NenamjaLocalDataSource {
 }
