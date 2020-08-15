@@ -3,8 +3,4 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="baseUrl">https://dev.soe.vcp.lotte.com</string>
-
-    <string name="naver_map_client_key">251rtbstz6</string>
-    <string name="naver_map_secret_key">nmx0ql1z6DYthQkJiBytjjHHZPNCpHFZsXz8Oz7S</string>
 </resources>

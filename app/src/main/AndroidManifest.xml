@@ -26,7 +26,7 @@
         android:usesCleartextTraffic="true">
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="@string/naver_map_client_key" />
+            android:value="${NAVER_MAP_CLIENT_KEY}" />
 
         <activity
             android:name=".MainActivity"
