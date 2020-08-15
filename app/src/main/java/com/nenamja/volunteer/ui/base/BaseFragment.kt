@@ -3,6 +3,7 @@ package com.nenamja.volunteer.ui.base
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import com.nenamja.volunteer.App.Companion.dlog
 
 abstract class BaseFragment<in VIEW : BaseContract.View, PRESENTER : BaseContract.Presenter<VIEW>>(
     private val mLayoutResId: Int

@@ -2,6 +2,7 @@ package com.nenamja.volunteer.ui.base
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import com.nenamja.volunteer.App.Companion.dlog
 
 /**
 * 최상위 프레젠터 객체

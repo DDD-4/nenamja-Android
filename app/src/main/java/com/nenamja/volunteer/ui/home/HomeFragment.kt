@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import com.nenamja.volunteer.R
 import com.nenamja.volunteer.ui.base.BaseFragment
-import com.nenamja.volunteer.data.Memo
 
 /**
  * HomeView
