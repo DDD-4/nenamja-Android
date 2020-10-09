@@ -46,6 +46,8 @@ class NenamjaClient {
                 .addHeader("x-channel-id", "HD").build()
             val response = it.proceed(request)
             response
-        }.build()
+        }
+            .addInterceptor(httpLoggingInterceptor)
+            .build()
     }
 }
