@@ -2,6 +2,7 @@ package com.nenamja.volunteer.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.nenamja.volunteer.R
 import com.nenamja.volunteer.data.remote.model.VolunteerContent
@@ -23,6 +24,7 @@ class HomeFragment :
 
     override fun doViewCreated(view: View, savedInstanceState: Bundle?) {
         //TODO : ㄱㅣ존의 View Creted에서 하는 작업을 넣으면 됩니다. 레이아웃 초기화등
+        loadMemoList()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
