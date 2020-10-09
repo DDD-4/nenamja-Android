@@ -6,4 +6,7 @@
     <string name="facebook_app_id">336023410772331</string>
     <string name="fb_login_protocol_scheme">fb336023410772331</string>
 
+    <string name="volunteer_program_label">프로그램명 : %s </string>
+    <string name="volunteer_org_name_label">조직명 : %s </string>
+    <string name="volunteer_target_label">신청대상 : %s </string>
 </resources>
