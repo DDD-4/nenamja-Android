@@ -3,6 +3,7 @@ package com.nenamja.volunteer.ui.home
 import android.content.Context
 import com.nenamja.volunteer.ui.base.BaseContract
 import com.nenamja.volunteer.data.Memo
+import com.nenamja.volunteer.data.remote.model.VolunteerContent
 
 /**
  * Home View 와 Presenter
@@ -84,7 +85,7 @@ interface HomeContract {
          */
         fun updateVolunteerList(
             keyword: String?,
-            memoList: List<Any>
+            memoList: List<VolunteerContent>
         )
 
         /**

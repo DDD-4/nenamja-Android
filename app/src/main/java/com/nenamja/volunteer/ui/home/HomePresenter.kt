@@ -9,6 +9,8 @@ import com.nenamja.volunteer.data.remote.source.NenamjaRemoteDataSourceImpl
 import com.nenamja.volunteer.net.NenamjaClient
 import com.nenamja.volunteer.ui.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * HomePresenter
@@ -34,15 +36,18 @@ class HomePresenter : BasePresenter<HomeContract.ViewForFragment>(),
         App.dlog.e(
             (keyword == null || keyword == "").toString() + " " + keyword
         )
+        val pattern = "yyyy-MM-dd"
+        val simpleDateFormat = SimpleDateFormat(pattern)
+        val today: String = simpleDateFormat.format(Date())
         keyword?.let { searchKeyword ->
-            mRepository.getVolunteerList().observeOn(
+            mRepository.getVolunteerList(today = today).observeOn(
                 AndroidSchedulers.mainThread()
             ).doOnSubscribe { disposable ->
                 view.showProgress()
             }.doFinally {
                 view.dismissProgress()
             }.subscribe {
-                view.updateVolunteerList(searchKeyword, it)
+                view.updateVolunteerList(searchKeyword, it.contents)
             }.addDisposable()
 
 //            mDataSource.nenamjaList

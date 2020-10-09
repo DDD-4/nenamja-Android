@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.nenamja.volunteer.R
+import com.nenamja.volunteer.data.remote.model.VolunteerContent
 import com.nenamja.volunteer.ui.base.BaseFragment
 
 /**
@@ -56,7 +57,7 @@ class HomeFragment :
         presenter.loadMemoList("")
     }
 
-    override fun updateVolunteerList(keyword: String?, memoList: List<Any>) {
+    override fun updateVolunteerList(keyword: String?, memoList: List<VolunteerContent>) {
         //TODO("Not yet implemented")
     }
 
