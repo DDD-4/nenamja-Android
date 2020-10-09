@@ -7,10 +7,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NenamjaServiceApi {
-    @GET("/mainVolList")
+    @GET("mainVolList")
     fun getVolunteerList(
-        @Query("query") pageNo: Int? = 1,
-        @Query("query") rowNum: Int? = 10,
-        @Query("query") todayDate: String?
+        @Query("page") pageNo: Int? = 1,
+        @Query("rowNum") rowNum: Int? = 10,
+        @Query("todayDate") todayDate: String?
     ): Single<VolunteerListModel>
 }
