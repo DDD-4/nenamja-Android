@@ -35,9 +35,14 @@ class VolunteerListAdapter :
 
     class VolunteerContentViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun setData(data: VolunteerContent) {
-            view.tv_title.text = data.PGMNM
-            view.tv_org_name.text = data.ORGANNM
-            view.tv_target.text = data.TARGET
+            view.tv_title.text =
+                String.format(view.context.getString(R.string.volunteer_program_label), data.PGMNM)
+            view.tv_org_name.text = String.format(
+                view.context.getString(R.string.volunteer_org_name_label),
+                data.ORGANNM
+            )
+            view.tv_target.text =
+                String.format(view.context.getString(R.string.volunteer_target_label), data.TARGET)
         }
     }
 }
