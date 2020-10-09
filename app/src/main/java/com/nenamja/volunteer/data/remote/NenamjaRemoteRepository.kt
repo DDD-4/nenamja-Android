@@ -1,5 +1,6 @@
 package com.nenamja.volunteer.data.remote
 
+import com.nenamja.volunteer.data.remote.model.VolunteerListModel
 import io.reactivex.Flowable
 
 interface NenamjaRemoteRepository : NenamjaRepository {
@@ -10,6 +11,7 @@ interface NenamjaRemoteRepository : NenamjaRepository {
         pgm: String? = "",
         org: String? = "",
         sdate: String? = "",
-        edate: String? = ""
-    ): Flowable<List<Any>>
+        edate: String? = "",
+        today: String?
+    ): Flowable<VolunteerListModel>
 }

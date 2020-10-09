@@ -1,6 +1,7 @@
 package com.nenamja.volunteer.data.remote
 
 import com.nenamja.volunteer.data.local.NenamjaLocalDataSourceImpl
+import com.nenamja.volunteer.data.remote.model.VolunteerListModel
 import com.nenamja.volunteer.data.remote.source.NenamjaRemoteDataSource
 import io.reactivex.Flowable
 
@@ -15,16 +16,13 @@ class NenamjaRemoteRepositoryImpl(
         pgm: String?,
         org: String?,
         sdate: String?,
-        edate: String?
-    ): Flowable<List<Any>> {
+        edate: String?,
+        today: String?
+    ): Flowable<VolunteerListModel> {
         return nenamjaRemoteDataSource.getVolunteerList(
-            pageNo,
-            numOfRows,
-            sido,
-            pgm,
-            org,
-            sdate,
-            edate
-        ).onErrorReturn { listOf() }.toFlowable()
+            pageNo = pageNo,
+            numOfRows = numOfRows,
+            today = today
+        ).onErrorReturn { VolunteerListModel(result = "400", contents = listOf()) }.toFlowable()
     }
 }
