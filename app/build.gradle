@@ -48,13 +48,13 @@ android {
     productFlavors {
         dev {
             dimension "type"
-            buildConfigField "String", "BASE_URL", "\"http://15.165.133.94:8088/api\""
+            buildConfigField "String", "BASE_URL", "\"http://15.165.133.94:8088/api/\""
             buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl%2By6AB5mXcK2jpe5QJeuiJGXd0y01eQh%2BRi20dCCH4KSUs4dW7OK%2B6PPEGM6%2BUMqaQ%3D%3D\""
             buildConfigField "String", "NAVER_MAP_CLIENT_KEY", "\"251rtbstz6\""
             buildConfigField "String", "NAVER_MAP_SECRET_KEY", "\"nmx0ql1z6DYthQkJiBytjjHHZPNCpHFZsXz8Oz7S\""
         }
         prod {
-            buildConfigField "String", "BASE_URL", "\"http://15.165.133.94:8088/api\""
+            buildConfigField "String", "BASE_URL", "\"http://15.165.133.94:8088/api/\""
             buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl%2By6AB5mXcK2jpe5QJeuiJGXd0y01eQh%2BRi20dCCH4KSUs4dW7OK%2B6PPEGM6%2BUMqaQ%3D%3D\""
             buildConfigField "String", "NAVER_MAP_CLIENT_KEY", "\"251rtbstz6\""
             buildConfigField "String", "NAVER_MAP_SECRET_KEY", "\"nmx0ql1z6DYthQkJiBytjjHHZPNCpHFZsXz8Oz7S\""
