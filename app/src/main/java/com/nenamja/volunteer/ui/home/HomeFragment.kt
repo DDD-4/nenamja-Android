@@ -2,11 +2,14 @@ package com.nenamja.volunteer.ui.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nenamja.volunteer.R
 import com.nenamja.volunteer.data.remote.model.VolunteerContent
 import com.nenamja.volunteer.ui.base.BaseFragment
+import com.nenamja.volunteer.ui.home.adapter.VolunteerListAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * HomeView
@@ -24,6 +27,15 @@ class HomeFragment :
 
     override fun doViewCreated(view: View, savedInstanceState: Bundle?) {
         //TODO : ㄱㅣ존의 View Creted에서 하는 작업을 넣으면 됩니다. 레이아웃 초기화등
+        with(rv_list) {
+            adapter = VolunteerListAdapter()
+            addItemDecoration(
+                DividerItemDecoration(
+                    context,
+                    (layoutManager as LinearLayoutManager).orientation
+                )
+            )
+        }
         loadMemoList()
     }
 
@@ -59,8 +71,11 @@ class HomeFragment :
         presenter.loadMemoList("")
     }
 
-    override fun updateVolunteerList(keyword: String?, memoList: List<VolunteerContent>) {
+    override fun updateVolunteerList(keyword: String?, volunteerList: List<VolunteerContent>) {
         //TODO("Not yet implemented")
+        rv_list?.let {
+            (it.adapter as VolunteerListAdapter).setVolunteerList(volunteerList)
+        }
     }
 
     override fun searchViewOn() {
