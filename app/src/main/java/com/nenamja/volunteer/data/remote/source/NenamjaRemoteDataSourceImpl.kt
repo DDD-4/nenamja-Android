@@ -1,6 +1,7 @@
 package com.nenamja.volunteer.data.remote.source
 
 import com.nenamja.volunteer.data.remote.api.NenamjaServiceApi
+import com.nenamja.volunteer.data.remote.model.VolunteerListModel
 import io.reactivex.Single
 
 class NenamjaRemoteDataSourceImpl(private val volunteerApi: NenamjaServiceApi) :
@@ -12,16 +13,13 @@ class NenamjaRemoteDataSourceImpl(private val volunteerApi: NenamjaServiceApi) :
         pgm: String?,
         org: String?,
         sdate: String?,
-        edate: String?
-    ): Single<List<Any>> {
+        edate: String?,
+        today: String?
+    ): Single<VolunteerListModel> {
         return volunteerApi.getVolunteerList(
             pageNo = pageNo,
-            numOfRows = numOfRows,
-            sido = sido,
-            pgm = pgm,
-            org = org,
-            sdate = sdate,
-            edate = edate
+            rowNum = numOfRows,
+            todayDate = today
         )
     }
 
