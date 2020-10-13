@@ -21,6 +21,8 @@ import java.util.*
 class HomePresenter : BasePresenter<HomeContract.ViewForFragment>(),
     HomeContract.PresenterForFragment {
 
+    private var page = 1
+
     private val mRepository: NenamjaRemoteRepository = NenamjaRemoteRepositoryImpl(
         NenamjaRemoteDataSourceImpl(
             NenamjaClient().provideService(NenamjaServiceApi::class.java)
@@ -40,13 +42,14 @@ class HomePresenter : BasePresenter<HomeContract.ViewForFragment>(),
         val simpleDateFormat = SimpleDateFormat(pattern)
         val today: String = simpleDateFormat.format(Date())
         keyword?.let { searchKeyword ->
-            mRepository.getVolunteerList(today = today).observeOn(
+            mRepository.getVolunteerList(pageNo = page, today = today).observeOn(
                 AndroidSchedulers.mainThread()
             ).doOnSubscribe { disposable ->
                 view.showProgress()
             }.doFinally {
                 view.dismissProgress()
             }.subscribe {
+                page += 1
                 view.updateVolunteerList(searchKeyword, it.contents)
             }.addDisposable()
 
@@ -80,5 +83,9 @@ class HomePresenter : BasePresenter<HomeContract.ViewForFragment>(),
 
     override fun unsubscribe() {
         // TODO("Not yet implemented")
+    }
+
+    fun refresh(){
+        page = 1
     }
 }
