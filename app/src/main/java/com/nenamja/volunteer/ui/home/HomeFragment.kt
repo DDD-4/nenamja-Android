@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nenamja.volunteer.R
 import com.nenamja.volunteer.data.remote.model.VolunteerContent
 import com.nenamja.volunteer.ui.base.BaseFragment
@@ -35,6 +36,25 @@ class HomeFragment :
                     (layoutManager as LinearLayoutManager).orientation
                 )
             )
+            addOnScrollListener(object : RecyclerView.OnScrollListener(){
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val size = (adapter as VolunteerListAdapter).itemCount
+                    if(!srl_refresh.isRefreshing){
+                        if((layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() == size - 1){
+                            loadMemoList()
+                        }
+                    }
+                }
+            })
+        }
+        with(srl_refresh){
+            setOnRefreshListener {
+                isRefreshing = true
+                presenter.refresh()
+                presenter.loadMemoList("")
+            }
+            isRefreshing = false
         }
         loadMemoList()
     }
@@ -75,6 +95,9 @@ class HomeFragment :
         //TODO("Not yet implemented")
         rv_list?.let {
             (it.adapter as VolunteerListAdapter).setVolunteerList(volunteerList)
+        }
+        srl_refresh?.let {
+            it.isRefreshing = false
         }
     }
 
