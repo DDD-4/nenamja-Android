@@ -10,7 +10,7 @@ interface NenamjaServiceApi {
     @GET("mainVolList")
     fun getVolunteerList(
         @Query("page") pageNo: Int? = 1,
-        @Query("rowNum") rowNum: Int? = 10,
+        @Query("rowNum") rowNum: Int? = 15,
         @Query("todayDate") todayDate: String?
     ): Single<VolunteerListModel>
 }
