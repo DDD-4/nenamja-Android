@@ -2,6 +2,7 @@ package com.ddd.nenamja.planv
 
 import android.app.Application
 import com.ddd.nenamja.planv.di.remoteModule
+import com.ddd.nenamja.planv.di.repositoryModule
 import com.ddd.nenamja.planv.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -18,6 +19,7 @@ class PlanVApplication : Application() {
             androidContext(this@PlanVApplication)
             modules(
                 remoteModule,
+                repositoryModule,
                 viewModelModule
             )
         }

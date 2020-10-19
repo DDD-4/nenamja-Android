@@ -2,11 +2,13 @@ package com.ddd.nenamja.planv.di
 
 import com.ddd.nenamja.planv.BuildConfig
 import com.ddd.nenamja.planv.data.remote.api.VolunteerDataApi
+import com.ddd.nenamja.planv.data.remote.source.PlanVDataSource
+import com.ddd.nenamja.planv.data.remote.source.PlanVDataSourceImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.jaxb.JaxbConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 val remoteModule = module {
@@ -21,18 +23,18 @@ val remoteModule = module {
             .build()
     }
 
-    single { JaxbConverterFactory.create() }
+    single { ScalarsConverterFactory.create() }
 
     single {
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(get())
-            .addConverterFactory(get<JaxbConverterFactory>())
+            .addConverterFactory(get<ScalarsConverterFactory>())
             .build()
     }
 
     single { get<Retrofit>().create(VolunteerDataApi::class.java) }
 
-//    single<MetaWeatherDataSource> { MetaWeatherDataSourceImpl(get()) }
+    single<PlanVDataSource> { PlanVDataSourceImpl(get()) }
 
 }

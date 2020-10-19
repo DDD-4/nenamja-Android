@@ -21,12 +21,12 @@ android {
     productFlavors {
         dev {
             dimension "type"
-            buildConfigField "String", "BASE_URL", "\"http://apis.data.go.kr/1383000/YouthActivInfoVolSrvc\""
-            buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl%2By6AB5mXcK2jpe5QJeuiJGXd0y01eQh%2BRi20dCCH4KSUs4dW7OK%2B6PPEGM6%2BUMqaQ%3D%3D\""
+            buildConfigField "String", "BASE_URL", "\"http://apis.data.go.kr/1383000/YouthActivInfoVolSrvc/\""
+            buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl+y6AB5mXcK2jpe5QJeuiJGXd0y01eQh+Ri20dCCH4KSUs4dW7OK+6PPEGM6+UMqaQ==\""
         }
         prod {
-            buildConfigField "String", "BASE_URL", "\"http://apis.data.go.kr/1383000/YouthActivInfoVolSrvc\""
-            buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl%2By6AB5mXcK2jpe5QJeuiJGXd0y01eQh%2BRi20dCCH4KSUs4dW7OK%2B6PPEGM6%2BUMqaQ%3D%3D\""
+            buildConfigField "String", "BASE_URL", "\"http://apis.data.go.kr/1383000/YouthActivInfoVolSrvc/\""
+            buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl+y6AB5mXcK2jpe5QJeuiJGXd0y01eQh+Ri20dCCH4KSUs4dW7OK+6PPEGM6+UMqaQ==\""
         }
     }
 
@@ -62,7 +62,10 @@ dependencies {
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
-    implementation 'com.squareup.retrofit2:converter-jaxb:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    implementation 'com.github.smart-fun:XmlToJson:1.4.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
