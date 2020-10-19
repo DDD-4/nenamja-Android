@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -16,6 +17,24 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "type"
+    productFlavors {
+        dev {
+            dimension "type"
+            buildConfigField "String", "BASE_URL", "\"http://apis.data.go.kr/1383000/YouthActivInfoVolSrvc\""
+            buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl%2By6AB5mXcK2jpe5QJeuiJGXd0y01eQh%2BRi20dCCH4KSUs4dW7OK%2B6PPEGM6%2BUMqaQ%3D%3D\""
+        }
+        prod {
+            buildConfigField "String", "BASE_URL", "\"http://apis.data.go.kr/1383000/YouthActivInfoVolSrvc\""
+            buildConfigField "String", "AUTH_KEY", "\"q9LoIwTYvighs4U9QBprl%2By6AB5mXcK2jpe5QJeuiJGXd0y01eQh%2BRi20dCCH4KSUs4dW7OK%2B6PPEGM6%2BUMqaQ%3D%3D\""
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -25,12 +44,52 @@ android {
 }
 
 dependencies {
+
+    def lifecycle_version = "2.2.0"
+    def glide_version = "4.11.0"
+    def navigation_version = "2.3.1"
+    def coroutine_version = "1.3.3"
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    testImplementation 'junit:junit:4.12'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+    implementation 'com.squareup.retrofit2:converter-jaxb:2.9.0'
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    implementation "com.github.bumptech.glide:annotations:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    //LifeCycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+    //  Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    implementation 'androidx.work:work-runtime-ktx:2.4.0'
+
+    //Koin
+    implementation 'org.koin:koin-core:2.1.6'
+    implementation 'org.koin:koin-androidx-viewmodel:2.1.6'
+    testImplementation 'org.koin:koin-test:2.0.1'
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    //Test
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
