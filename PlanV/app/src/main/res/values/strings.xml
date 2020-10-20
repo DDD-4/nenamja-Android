@@ -19,4 +19,8 @@
     <string name="call_phone">전화하기</string>
     <string name="find_navigation">길찾기</string>
     <string name="call_scheme">tel:%s</string>
+    <string name="call_alert_title">전화하기</string>
+    <string name="call_alert_message">%s로 통화 연결하</string>
+    <string name="call_confirm">통화하기</string>
+    <string name="call_cancel">취소</string>
 </resources>

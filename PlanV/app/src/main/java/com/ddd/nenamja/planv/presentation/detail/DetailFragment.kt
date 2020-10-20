@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ddd.nenamja.planv.R
@@ -59,9 +60,30 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 detailData.tel.replace("-", "").trim()
             )
             btn_call.setOnClickListener {
-                if(!phoneNumberScheme.isNullOrEmpty()){
+                if (!phoneNumberScheme.isNullOrEmpty()) {
                     Log.d("ironelder", "phone = $phoneNumberScheme")
-                    startActivity(Intent("android.intent.action.CALL", Uri.parse(phoneNumberScheme)))
+                    val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                    with(alertDialogBuilder) {
+                        setTitle(resources.getString(R.string.call_alert_title))
+                        setMessage(
+                            String.format(
+                                resources.getString(R.string.call_alert_message),
+                                detailData.tel
+                            )
+                        )
+                        setPositiveButton(resources.getString(R.string.call_confirm)
+                        ) { _, _ ->
+                            startActivity(
+                                Intent(
+                                    "android.intent.action.CALL",
+                                    Uri.parse(phoneNumberScheme)
+                                )
+                            )
+                        }
+                        setNeutralButton(resources.getString(R.string.call_cancel)){ _,_ ->
+
+                        }
+                    }.create().show()
                 }
             }
         })
