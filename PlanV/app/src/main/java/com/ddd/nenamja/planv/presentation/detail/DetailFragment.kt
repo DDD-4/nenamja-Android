@@ -1,6 +1,9 @@
 package com.ddd.nenamja.planv.presentation.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -11,6 +14,7 @@ import org.koin.android.ext.android.inject
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel: DetailViewModel by inject()
+    private var phoneNumberScheme: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,6 +53,17 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 detailData.addr
             )
             tv_address.text = address
+            Log.d("ironelder", "phone = ${detailData.tel}")
+            phoneNumberScheme = String.format(
+                resources.getString(R.string.call_scheme),
+                detailData.tel.replace("-", "").trim()
+            )
+            btn_call.setOnClickListener {
+                if(!phoneNumberScheme.isNullOrEmpty()){
+                    Log.d("ironelder", "phone = $phoneNumberScheme")
+                    startActivity(Intent("android.intent.action.CALL", Uri.parse(phoneNumberScheme)))
+                }
+            }
         })
         viewModel.getDetailData(key = key ?: "")
     }

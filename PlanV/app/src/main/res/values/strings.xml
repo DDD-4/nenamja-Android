@@ -18,4 +18,5 @@
     <string name="organize_address">상세주소: (%s) %s</string>
     <string name="call_phone">전화하기</string>
     <string name="find_navigation">길찾기</string>
+    <string name="call_scheme">tel:%s</string>
 </resources>
