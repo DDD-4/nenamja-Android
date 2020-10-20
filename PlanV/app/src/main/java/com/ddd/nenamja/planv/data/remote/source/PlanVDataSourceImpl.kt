@@ -15,6 +15,7 @@ class PlanVDataSourceImpl(private val volunteerDataApi: VolunteerDataApi):PlanVD
         )
     }
 
-    override suspend fun getVolunteerDetail() {
+    override suspend fun getVolunteerDetail(key: String): String {
+        return volunteerDataApi.getVolunteerDetail(key = key)
     }
 }

@@ -3,7 +3,7 @@ package com.ddd.nenamja.planv.data.remote.repository
 
 import com.ddd.nenamja.planv.data.remote.source.PlanVDataSource
 
-class PlanVRepositoryImpl(private val planVDataSource: PlanVDataSource):PlanVRepository {
+class PlanVRepositoryImpl(private val planVDataSource: PlanVDataSource) : PlanVRepository {
     override suspend fun getVolunteerList(
         page: Int,
         date: String,
@@ -16,6 +16,7 @@ class PlanVRepositoryImpl(private val planVDataSource: PlanVDataSource):PlanVRep
         )
     }
 
-    override suspend fun getVolunteerDetail() {
+    override suspend fun getVolunteerDetail(key: String): String {
+        return planVDataSource.getVolunteerDetail(key = key)
     }
 }

@@ -15,6 +15,9 @@ interface VolunteerDataApi {
         @Query("edate") edate: String
     ): String
 
-    @GET("api/location/{locationId}/")
-    suspend fun getVolunteerDetail(@Path("locationId") locationId: Int): Any
+    @GET("getVolProgrmInfo")
+    suspend fun getVolunteerDetail(
+        @Query("serviceKey") serviceKey: String = BuildConfig.AUTH_KEY,
+        @Query("key1") key: String
+    ): String
 }
