@@ -3,7 +3,9 @@
     <color name="colorPrimary">#ec653a</color>
     <color name="colorPrimaryDark">#ec653a</color>
     <color name="colorStatusBar">#626262</color>
+    <color name="colorListItemMaxPeople">#a0a0a0</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorBlack">#000000</color>
     <color name="colorHomeBackground">#ededed</color>
+    <color name="colorListItemBackground">#f7f7f7</color>
 </resources>

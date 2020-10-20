@@ -1,6 +1,5 @@
 package com.ddd.nenamja.planv.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,7 +18,8 @@ import java.util.*
 class HomeViewModel(private val planVRepository: PlanVRepository) : ViewModel() {
 
 
-    private var page:Int = 1
+    private var page: Int = 1
+    private var isEnd: Boolean = false
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -34,21 +34,43 @@ class HomeViewModel(private val planVRepository: PlanVRepository) : ViewModel() 
     val volunteerDataList: LiveData<List<Item>> get() = _volunteerDataList
 
     init {
+        resetVolunteerList()
+    }
+
+    fun resetVolunteerList() {
+        page = 1
+        isEnd = false
+        getVolunteerList()
+    }
+
+    fun loadMoreVolunteerList() {
+        if (!isEnd) {
+            page += 1
+            getVolunteerList()
+        }
+    }
+
+    private fun getVolunteerList() {
         viewModelScope.launch(Dispatchers.IO) {
             _isLoading.postValue(true)
             val calendar = Calendar.getInstance()
             val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.KOREA)
             val todayString = dateFormat.format(calendar.time)
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 val model = planVRepository.getVolunteerList(
                     page = page,
                     date = todayString,
                     location = ""
                 )
                 val xmlToJson = XmlToJson.Builder(model).build()
-                val volunteerListModel = Gson().fromJson(xmlToJson.toJson().toString(), VolunteerListModel::class.java)
-                if(volunteerListModel.response.body.items.item.isNotEmpty()){
-                    _volunteerDataList.postValue(volunteerListModel.response.body.items.item)
+                val volunteerListModel =
+                    Gson().fromJson(xmlToJson.toJson().toString(), VolunteerListModel::class.java)
+                if (volunteerListModel.response.body.items.item.isNotEmpty()) {
+                    val list = volunteerListModel.response.body.items.item
+                    if (list.size < 20) {
+                        isEnd = true
+                    }
+                    _volunteerDataList.postValue(list)
                 }
                 _isLoading.postValue(false)
             }

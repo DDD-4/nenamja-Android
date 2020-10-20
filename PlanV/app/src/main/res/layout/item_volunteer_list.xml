@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:background="@color/colorHomeBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:background="@color/colorListItemBackground">
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:gravity="center"
+            android:paddingEnd="5dp"
+            android:textAlignment="gravity"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="유료" />
+
+        <TextView
+            android:id="@+id/tv_item_program"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxHeight="40dp"
+            android:maxLines="2"
+            android:textAlignment="gravity"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_price"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="안내데스크 업무- 미래센터 내/외부 환경미화 활동 " />
+
+        <TextView
+            android:id="@+id/tv_max_people"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:textAlignment="gravity"
+            android:textColor="@color/colorListItemMaxPeople"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_price"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_program"
+            tools:text="모집인원 : 3명" />
+
+        <TextView
+            android:id="@+id/tv_target_people"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:textAlignment="gravity"
+            android:textColor="@color/colorListItemMaxPeople"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_price"
+            app:layout_constraintTop_toBottomOf="@id/tv_max_people"
+            tools:text="모집대상 : 중학생, 고등학생, 대학생중학생, 고등학생, 대학생중학생, 고등학생, 대학생중학생, 고등학생, 대학생중학생, 고등학생, 대학생중학생, 고등학생, 대학생" />
+
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:textAlignment="gravity"
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_price"
+            app:layout_constraintTop_toBottomOf="@id/tv_target_people"
+            tools:text="위치 : 당동청소년문화의집" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
