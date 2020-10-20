@@ -5,12 +5,14 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import java.security.MessageDigest
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -18,21 +20,34 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val navController: NavController by lazy {
         findNavController(R.id.nav_host_fragment)
     }
+
     override fun onSupportNavigateUp() = navController.navigateUp()
 
 
-    private fun permissionCheck(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), PERMISSION_GRANT_CODE)
-            Log.d("ironelder","permissionCheck not grant")
+    private fun permissionCheck() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CALL_PHONE
+            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSION_GRANT_CODE
+            )
+            Log.d("ironelder", "permissionCheck not grant")
         } else {
-            Log.d("ironelder","permissionCheck fail")
+            Log.d("ironelder", "permissionCheck fail")
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         permissionCheck()
+        getAppKeyHash()
     }
 
     override fun onRequestPermissionsResult(
@@ -46,8 +61,21 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             PERMISSION_GRANT_CODE -> {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() &&
-                            grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
                     Toast.makeText(this, "Call Permission", Toast.LENGTH_LONG).show()
+                } else {
+                    // Explain to the user that the feature is unavailable because
+                    // the features requires a permission that the user has denied.
+                    // At the same time, respect the user's decision. Don't link to
+                    // system settings in an effort to convince the user to change
+                    // their decision.
+                }
+
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[1] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    Toast.makeText(this, "Location Permission", Toast.LENGTH_LONG).show()
                 } else {
                     // Explain to the user that the feature is unavailable because
                     // the features requires a permission that the user has denied.
@@ -66,6 +94,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
 
     }
+    fun getAppKeyHash() {
+        try {
+            val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
+            for(i in info.signatures) {
+                val md: MessageDigest = MessageDigest.getInstance("SHA")
+                md.update(i.toByteArray())
 
+                val something = String(Base64.encode(md.digest(), 0)!!)
+                Log.e("Debug key", something)
+            }
+        } catch(e: Exception) {
+            Log.e("Not found", e.toString())
+        }
+    }
 
 }

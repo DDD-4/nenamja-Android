@@ -3,14 +3,19 @@ package com.ddd.nenamja.planv.presentation.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ddd.nenamja.planv.R
 import kotlinx.android.synthetic.main.fragment_detail.*
+import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPoint
+import net.daum.mf.map.api.MapView
 import org.koin.android.ext.android.inject
+
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
@@ -20,6 +25,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val key = arguments?.getString("keyArg")
+        initializeMap()
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             pb_loading.visibility = if (isLoading) View.VISIBLE else View.GONE
         })
@@ -54,14 +60,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 detailData.addr
             )
             tv_address.text = address
-            Log.d("ironelder", "phone = ${detailData.tel}")
             phoneNumberScheme = String.format(
                 resources.getString(R.string.call_scheme),
                 detailData.tel.replace("-", "").trim()
             )
             btn_call.setOnClickListener {
                 if (!phoneNumberScheme.isNullOrEmpty()) {
-                    Log.d("ironelder", "phone = $phoneNumberScheme")
                     val alertDialogBuilder = AlertDialog.Builder(requireContext())
                     with(alertDialogBuilder) {
                         setTitle(resources.getString(R.string.call_alert_title))
@@ -71,7 +75,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                                 detailData.tel
                             )
                         )
-                        setPositiveButton(resources.getString(R.string.call_confirm)
+                        setPositiveButton(
+                            resources.getString(R.string.call_confirm)
                         ) { _, _ ->
                             startActivity(
                                 Intent(
@@ -80,7 +85,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                                 )
                             )
                         }
-                        setNeutralButton(resources.getString(R.string.call_cancel)){ _,_ ->
+                        setNeutralButton(resources.getString(R.string.call_cancel)) { _, _ ->
 
                         }
                     }.create().show()
@@ -88,6 +93,29 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         })
         viewModel.getDetailData(key = key ?: "")
+    }
+
+    private fun initializeMap() {
+        val mapView = MapView(requireActivity())
+        mapView.setDaumMapApiKey("afccb3e4d2081161b4a1570ed23a0ea7")
+        mapView.mapType = MapView.MapType.Standard
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633), true);
+        val marker = MapPOIItem()
+        marker.itemName = "Default Marker"
+        marker.tag = 0
+        marker.mapPoint = MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633)
+        marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
+
+        marker.selectedMarkerType =
+            MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+
+        mapView.addPOIItem(marker)
+        mapView.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT
+        )
+        (map_view as ViewGroup).addView(mapView)
     }
 
 }
