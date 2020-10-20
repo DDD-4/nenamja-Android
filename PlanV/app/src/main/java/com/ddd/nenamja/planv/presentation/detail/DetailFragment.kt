@@ -3,6 +3,7 @@ package com.ddd.nenamja.planv.presentation.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ddd.nenamja.planv.R
+import com.kakao.sdk.navi.NaviClient
 import kotlinx.android.synthetic.main.fragment_detail.*
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -25,11 +27,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val key = arguments?.getString("keyArg")
-        initializeMap()
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             pb_loading.visibility = if (isLoading) View.VISIBLE else View.GONE
         })
         viewModel.detail.observe(viewLifecycleOwner, Observer { detailData ->
+            viewModel.getAddressData(detailData.addr, detailData.organNm)
             val peopleInfo = detailData.target.split(" ")
             val maxPeople = peopleInfo.last().replace("(", "").replace(")", "")
             val targetPeople =
@@ -92,24 +94,29 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 }
             }
         })
+        viewModel.mapCoodi.observe(viewLifecycleOwner, Observer { coodinate ->
+            Log.d("ironelder", "coodi = $coodinate")
+            if (coodinate.first != "0" && coodinate.second != "0") {
+                initializeMap(coodinate.first, coodinate.second, coodinate.third)
+            }
+        })
         viewModel.getDetailData(key = key ?: "")
     }
 
-    private fun initializeMap() {
+    private fun initializeMap(x: String, y: String, dest:String) {
+        val latitude = x.toDouble()
+        val longitude = y.toDouble()
         val mapView = MapView(requireActivity())
         mapView.setDaumMapApiKey("afccb3e4d2081161b4a1570ed23a0ea7")
         mapView.mapType = MapView.MapType.Standard
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633), true);
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true);
         val marker = MapPOIItem()
-        marker.itemName = "Default Marker"
+        marker.itemName = dest
         marker.tag = 0
-        marker.mapPoint = MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633)
+        marker.mapPoint = MapPoint.mapPointWithGeoCoord(latitude, longitude)
         marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
-
         marker.selectedMarkerType =
             MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-
-
         mapView.addPOIItem(marker)
         mapView.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
