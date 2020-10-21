@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onSupportNavigateUp() = navController.navigateUp()
 
-
     private fun permissionCheck() {
         if (ContextCompat.checkSelfPermission(
                 this,
@@ -30,11 +29,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
                 PERMISSION_GRANT_CODE
             )
             Log.d("ironelder", "permissionCheck not grant")
@@ -75,6 +77,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                             grantResults[1] == PackageManager.PERMISSION_GRANTED)
                 ) {
                     Toast.makeText(this, "Location Permission", Toast.LENGTH_LONG).show()
+                } else {
+                    // Explain to the user that the feature is unavailable because
+                    // the features requires a permission that the user has denied.
+                    // At the same time, respect the user's decision. Don't link to
+                    // system settings in an effort to convince the user to change
+                    // their decision.
+                }
+
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[2] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    Toast.makeText(this, "Course Permission", Toast.LENGTH_LONG).show()
                 } else {
                     // Explain to the user that the feature is unavailable because
                     // the features requires a permission that the user has denied.
