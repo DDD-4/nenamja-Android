@@ -18,6 +18,7 @@
         android:theme="@style/AppTheme">
 
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="afccb3e4d2081161b4a1570ed23a0ea7"/>
+        <meta-data android:name="com.kakao.sdk.kakaonavi.useWebView" android:value="false" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

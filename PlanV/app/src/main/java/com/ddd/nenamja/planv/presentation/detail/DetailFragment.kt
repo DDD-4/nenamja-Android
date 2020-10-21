@@ -11,12 +11,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ddd.nenamja.planv.R
+import com.kakao.sdk.common.util.KakaoCustomTabsClient
 import com.kakao.sdk.navi.NaviClient
+import com.kakao.sdk.navi.model.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import org.koin.android.ext.android.inject
+import java.nio.file.attribute.AclEntry.newBuilder
 
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
@@ -123,6 +126,27 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             FrameLayout.LayoutParams.MATCH_PARENT
         )
         (map_view as ViewGroup).addView(mapView)
+        btn_find_navi.setOnClickListener {
+            if(NaviClient.instance.isKakaoNaviInstalled(requireContext())){
+                Log.i("ironelder", "카카오내비 앱으로 길안내 가능")
+                startActivity(
+                    NaviClient.instance.navigateIntent(
+                        Location(name = dest, x = longitude.toString(), y = latitude.toString()),
+                        NaviOption(coordType = CoordType.WGS84)
+                    )
+                )
+            } else {
+                Log.i("ironelder", "카카오내비 미설치: 웹 길안내 사용 권장")
+                val uri =
+                    NaviClient.instance.navigateWebUrl(
+                        Location(name = dest, x = longitude.toString(), y = latitude.toString()),
+                        NaviOption(coordType = CoordType.WGS84)
+                    )
+
+                // CustomTabs로 길안내
+                KakaoCustomTabsClient.openWithDefault(requireContext(), uri)
+            }
+        }
     }
 
 }
