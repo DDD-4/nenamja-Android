@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">PlanV</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="splash_title">PLAN V</string>
+    <string name="home_title">PLAN V</string>
+    <string name="max_people">모집인원: %s</string>
+    <string name="target_people">모집대상: %s</string>
+    <string name="volunteer_info1">상세내용: %s</string>
+    <string name="volunteer_info2">추가내용: %s</string>
+    <string name="target_location">위치: %s</string>
+    <string name="target_all">전체</string>
+    <string name="price_free">무료</string>
+    <string name="price_not_free">유료</string>
+    <string name="not_more_info">추가 내용 없음</string>
+    <string name="organize_name">기관명: %s</string>
+    <string name="organize_manager">담당자: %s</string>
+    <string name="organize_address">상세주소: (%s) %s</string>
+    <string name="call_phone">전화하기</string>
+    <string name="find_navigation">길찾기</string>
+    <string name="call_scheme">tel:%s</string>
+    <string name="call_alert_title">전화하기</string>
+    <string name="call_alert_message">%s로 통화 연결하</string>
+    <string name="call_confirm">통화하기</string>
+    <string name="call_cancel">취소</string>
+</resources>
