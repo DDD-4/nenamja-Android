@@ -2,12 +2,11 @@ package com.ddd.nenamja.planv
 
 import android.Manifest
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
@@ -94,7 +93,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
 
     }
-    fun getAppKeyHash() {
+    
+    private fun getAppKeyHash() {
         try {
             val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
             for(i in info.signatures) {
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 md.update(i.toByteArray())
 
                 val something = String(Base64.encode(md.digest(), 0)!!)
-                Log.e("Debug key", something)
+//                Log.e("Debug key", something)
             }
         } catch(e: Exception) {
             Log.e("Not found", e.toString())
