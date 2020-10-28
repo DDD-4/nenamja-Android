@@ -13,18 +13,19 @@ import androidx.lifecycle.Observer
 import com.ddd.nenamja.planv.R
 import com.kakao.sdk.common.util.KakaoCustomTabsClient
 import com.kakao.sdk.navi.NaviClient
-import com.kakao.sdk.navi.model.*
+import com.kakao.sdk.navi.model.CoordType
+import com.kakao.sdk.navi.model.Location
+import com.kakao.sdk.navi.model.NaviOption
 import kotlinx.android.synthetic.main.fragment_detail.*
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import org.koin.android.ext.android.inject
-import java.nio.file.attribute.AclEntry.newBuilder
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
-    private val viewModel: DetailViewModel by inject()
+    private val viewModel by viewModel<DetailViewModel>()
     private var phoneNumberScheme: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
