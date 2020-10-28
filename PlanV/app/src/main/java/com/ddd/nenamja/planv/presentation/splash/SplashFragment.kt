@@ -5,11 +5,11 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ddd.nenamja.planv.R
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
-    private val viewModel: SplashViewModel by inject()
+    private val viewModel by viewModel<SplashViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

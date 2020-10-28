@@ -1,5 +1,6 @@
 package com.ddd.nenamja.planv.di
 
+import com.ddd.nenamja.planv.MainViewModel
 import com.ddd.nenamja.planv.presentation.detail.DetailViewModel
 import com.ddd.nenamja.planv.presentation.home.HomeViewModel
 import com.ddd.nenamja.planv.presentation.splash.SplashViewModel
@@ -14,5 +15,7 @@ val viewModelModule = module {
     viewModel { HomeViewModel(get()) }
 
     viewModel { DetailViewModel(get(), get()) }
+
+    viewModel { MainViewModel() }
 
 }

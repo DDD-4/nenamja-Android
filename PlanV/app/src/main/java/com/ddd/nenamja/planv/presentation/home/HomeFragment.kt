@@ -2,7 +2,6 @@ package com.ddd.nenamja.planv.presentation.home
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -10,13 +9,16 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ddd.nenamja.planv.MainViewModel
 import com.ddd.nenamja.planv.R
 import com.ddd.nenamja.planv.presentation.home.adapter.VolunteerListAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
-    private val viewModel: HomeViewModel by inject()
+    private val viewModel by viewModel<HomeViewModel>()
+    private val sharedViewModel by sharedViewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
