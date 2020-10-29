@@ -1,6 +1,7 @@
 package com.ddd.nenamja.planv
 
 import android.location.Geocoder
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,7 @@ class MainViewModel : ViewModel() {
             val result = geoCoder.getFromLocation(latitude,longitude, 1)
             if(!result.isNullOrEmpty()){
                 val admin = result[0].adminArea
+                Log.d("ironelder", "admin result = $admin")
             }
         }
     }
