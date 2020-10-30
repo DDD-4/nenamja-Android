@@ -3,18 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     tools:context=".presentation.splash.SplashFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/tv_title1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:textAlignment="gravity"
         android:textStyle="bold"
-        android:textSize="50sp"
-        android:textColor="@color/colorBlack"
-        android:text="@string/splash_title" />
+        android:textSize="22sp"
+        android:textColor="@color/colorWhite"
+        android:alpha="0.5"
+        app:layout_constraintBottom_toTopOf="@id/tv_title2"
+        android:text="@string/splash_title1" />
+    <TextView
+        android:id="@+id/tv_title2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAlignment="gravity"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/splash_title2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

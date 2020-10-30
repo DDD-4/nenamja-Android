@@ -2,7 +2,8 @@
     <string name="app_name">PlanV</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="splash_title">PLAN V</string>
+    <string name="splash_title1">Let\'s volunteer</string>
+    <string name="splash_title2">청소년 봉사활동</string>
     <string name="home_title">PLAN V</string>
     <string name="max_people">모집인원: %s</string>
     <string name="target_people">모집대상: %s</string>
