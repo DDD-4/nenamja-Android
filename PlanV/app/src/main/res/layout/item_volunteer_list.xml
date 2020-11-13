@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
+        android:padding="10dp"
         android:background="@color/colorListItemBackground">
 
         <TextView
@@ -39,9 +39,10 @@
             android:textColor="@color/colorBlack"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_price"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_price"
             tools:text="안내데스크 업무- 미래센터 내/외부 환경미화 활동 " />
 
         <TextView
@@ -51,10 +52,10 @@
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:textAlignment="gravity"
-            android:textColor="@color/colorListItemMaxPeople"
+            android:textColor="@color/colorBlack"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_price"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_item_program"
             tools:text="모집인원 : 3명" />
 
@@ -62,7 +63,7 @@
             android:id="@+id/tv_target_people"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
@@ -70,7 +71,7 @@
             android:textColor="@color/colorListItemMaxPeople"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_price"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_max_people"
             tools:text="모집대상 : 중학생, 고등학생, 대학생중학생, 고등학생, 대학생중학생, 고등학생, 대학생중학생, 고등학생, 대학생중학생, 고등학생, 대학생중학생, 고등학생, 대학생" />
 
@@ -79,13 +80,13 @@
             android:id="@+id/tv_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="25dp"
             android:gravity="center_vertical"
             android:textAlignment="gravity"
             android:textColor="@color/colorBlack"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_price"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_target_people"
             tools:text="위치 : 당동청소년문화의집" />
     </androidx.constraintlayout.widget.ConstraintLayout>

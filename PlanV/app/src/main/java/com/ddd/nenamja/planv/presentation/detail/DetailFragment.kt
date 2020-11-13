@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ddd.nenamja.planv.R
 import com.kakao.sdk.common.util.KakaoCustomTabsClient
 import com.kakao.sdk.navi.NaviClient
@@ -105,6 +106,10 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         })
         viewModel.getDetailData(key = key ?: "")
+
+        btn_back.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun initializeMap(x: String, y: String, dest:String) {

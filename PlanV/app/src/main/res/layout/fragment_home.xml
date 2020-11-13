@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/home_title"
+        android:text="@string/splash_title2"
         android:textAlignment="gravity"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"

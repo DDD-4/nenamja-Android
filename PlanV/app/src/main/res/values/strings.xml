@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PlanV</string>
+    <string name="app_name">봉사활동</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="splash_title1">Let\'s volunteer</string>
