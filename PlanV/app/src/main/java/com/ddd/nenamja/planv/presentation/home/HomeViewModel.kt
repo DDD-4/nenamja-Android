@@ -20,6 +20,7 @@ class HomeViewModel(private val planVRepository: PlanVRepository) : ViewModel() 
 
     private var page: Int = 1
     private var isEnd: Boolean = false
+    private var location: String = ""
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -37,7 +38,7 @@ class HomeViewModel(private val planVRepository: PlanVRepository) : ViewModel() 
 //        resetVolunteerList()
     }
 
-    fun resetVolunteerList(location: String = "") {
+    fun resetVolunteerList() {
         page = 1
         isEnd = false
         getVolunteerList(location)
@@ -46,8 +47,12 @@ class HomeViewModel(private val planVRepository: PlanVRepository) : ViewModel() 
     fun loadMoreVolunteerList() {
         if (!isEnd) {
             page += 1
-            getVolunteerList()
+            getVolunteerList(location)
         }
+    }
+
+    fun setLocation(location: String){
+        this.location = location
     }
 
     private fun getVolunteerList(location: String = "") {

@@ -21,8 +21,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel by viewModel<HomeViewModel>()
     private val sharedViewModel by sharedViewModel<MainViewModel>()
 
-    private var location = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -58,13 +56,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         with(srl_refresh) {
             setOnRefreshListener {
                 isRefreshing = true
-                viewModel.resetVolunteerList(location)
+                viewModel.resetVolunteerList()
             }
         }
         sharedViewModel.addressLocation.observe(viewLifecycleOwner, Observer { location ->
-            this.location = location
-            Log.d("ironelder", "home Location = $location")
-            viewModel.resetVolunteerList(location = location)
+            viewModel.setLocation(location ?: "")
+            viewModel.resetVolunteerList()
         })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             pb_loading.visibility = if (isLoading == true) View.VISIBLE else View.GONE
