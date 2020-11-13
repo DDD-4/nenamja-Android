@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 class SplashViewModel : ViewModel() {
     fun startSplash(view : SplashFragment){
         viewModelScope.launch {
-            delay(1500)
+            delay(2500)
             view.goToHome()
         }
     }

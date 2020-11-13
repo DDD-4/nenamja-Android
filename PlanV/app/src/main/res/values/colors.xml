@@ -10,4 +10,5 @@
     <color name="colorListItemBackground">#f7f7f7</color>
     <color name="colorDetailPrice">#515151</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDetailGroupPeople">#808080</color>
 </resources>

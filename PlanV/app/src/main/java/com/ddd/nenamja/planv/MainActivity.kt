@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.google.android.gms.maps.model.LatLng
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.security.MessageDigest
 import java.util.*
 
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val locationManager by lazy {
         getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
+    private val viewModel by viewModel<MainViewModel>()
     var latitude = 0.0
     var longitude = 0.0
 
@@ -56,12 +58,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             )
             Log.d("ironelder", "permissionCheck not grant")
         } else {
+
             val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             location?.let {
                 latitude = it.latitude
                 longitude = it.longitude
                 val geoCoder = Geocoder(applicationContext, Locale.KOREA)
-                val result = geoCoder.getFromLocation(latitude,longitude, 1)
+                viewModel.getAddress(
+                    latitude = latitude,
+                    longitude = longitude,
+                    geoCoder = geoCoder
+                )
+                val result = geoCoder.getFromLocation(latitude, longitude, 1)
                 Log.d("ironelder", "result = $result")
             }
             Log.d("ironelder", "permissionCheck all grant")

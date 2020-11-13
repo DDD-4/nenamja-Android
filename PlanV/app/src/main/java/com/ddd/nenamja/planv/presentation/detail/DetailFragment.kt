@@ -10,6 +10,8 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.ddd.nenamja.planv.BuildConfig
 import com.ddd.nenamja.planv.R
 import com.kakao.sdk.common.util.KakaoCustomTabsClient
 import com.kakao.sdk.navi.NaviClient
@@ -105,13 +107,17 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         })
         viewModel.getDetailData(key = key ?: "")
+
+        btn_back.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun initializeMap(x: String, y: String, dest:String) {
         val latitude = x.toDouble()
         val longitude = y.toDouble()
         val mapView = MapView(requireActivity())
-        mapView.setDaumMapApiKey("afccb3e4d2081161b4a1570ed23a0ea7")
+        mapView.setDaumMapApiKey(BuildConfig.MAP_KEY)
         mapView.mapType = MapView.MapType.Standard
         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true);
         val marker = MapPOIItem()

@@ -2,6 +2,7 @@ package com.ddd.nenamja.planv.presentation.home
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -58,6 +59,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 viewModel.resetVolunteerList()
             }
         }
+        sharedViewModel.addressLocation.observe(viewLifecycleOwner, Observer { location ->
+            viewModel.setLocation(location ?: "")
+            viewModel.resetVolunteerList()
+        })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             pb_loading.visibility = if (isLoading == true) View.VISIBLE else View.GONE
         })
