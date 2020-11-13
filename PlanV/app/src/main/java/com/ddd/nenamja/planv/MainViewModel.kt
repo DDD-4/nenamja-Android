@@ -34,17 +34,41 @@ class MainViewModel : ViewModel() {
 
     fun getAddress(latitude: Double, longitude: Double, geoCoder: Geocoder) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = geoCoder.getFromLocation(latitude, longitude, 1)
+            val result = geoCoder.getFromLocation(latitude, longitude, 5)
             if (!result.isNullOrEmpty()) {
-                val admin = result[0].adminArea
-                admin?.let { adminLocal ->
-                    val location = mapToStateData.first { adminLocal.contains(it) }
-                    if (location.isNotEmpty()) {
-                        _addressLocation.postValue(location)
-                    } else {
-                        //충청남도 , 충청북도,
+                val adminResult = result.filter { it.adminArea != null }
+                Log.d("ironelder", "admin result = $adminResult")
+                if(!adminResult.isNullOrEmpty()){
+                    val admin = adminResult[0].adminArea
+                    admin?.let { adminLocal ->
+                        val location = mapToStateData.first { adminLocal.contains(it) }
+                        if (location.isNotEmpty()) {
+                            _addressLocation.postValue(location)
+                        } else {
+                            //충청남도, 충청북도, 전라북도, 전라남도, 경상북도, 경상남도
+                            when{
+                                adminLocal.contains("충청남") -> {
+                                    _addressLocation.postValue("충남")
+                                }
+                                adminLocal.contains("충청북") -> {
+                                    _addressLocation.postValue("충북")
+                                }
+                                adminLocal.contains("전라남") -> {
+                                    _addressLocation.postValue("전남")
+                                }
+                                adminLocal.contains("전라북") -> {
+                                    _addressLocation.postValue("전북")
+                                }
+                                adminLocal.contains("경상남") -> {
+                                    _addressLocation.postValue("경남")
+                                }
+                                adminLocal.contains("경상북") -> {
+                                    _addressLocation.postValue("경북")
+                                }
+                            }
+                        }
+                        Log.d("ironelder", "admin result = $adminLocal")
                     }
-                    Log.d("ironelder", "admin result = $adminLocal")
                 }
             }
         }

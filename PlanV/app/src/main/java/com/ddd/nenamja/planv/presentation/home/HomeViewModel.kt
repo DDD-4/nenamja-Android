@@ -34,13 +34,13 @@ class HomeViewModel(private val planVRepository: PlanVRepository) : ViewModel() 
     val volunteerDataList: LiveData<List<Item>> get() = _volunteerDataList
 
     init {
-        resetVolunteerList()
+//        resetVolunteerList()
     }
 
-    fun resetVolunteerList() {
+    fun resetVolunteerList(location: String = "") {
         page = 1
         isEnd = false
-        getVolunteerList()
+        getVolunteerList(location)
     }
 
     fun loadMoreVolunteerList() {
@@ -50,7 +50,7 @@ class HomeViewModel(private val planVRepository: PlanVRepository) : ViewModel() 
         }
     }
 
-    private fun getVolunteerList() {
+    private fun getVolunteerList(location: String = "") {
         viewModelScope.launch(Dispatchers.IO) {
             _isLoading.postValue(true)
             val calendar = Calendar.getInstance()
@@ -60,7 +60,7 @@ class HomeViewModel(private val planVRepository: PlanVRepository) : ViewModel() 
                 val model = planVRepository.getVolunteerList(
                     page = page,
                     date = todayString,
-                    location = ""
+                    location = location
                 )
                 val xmlToJson = XmlToJson.Builder(model).build()
                 val volunteerListModel =

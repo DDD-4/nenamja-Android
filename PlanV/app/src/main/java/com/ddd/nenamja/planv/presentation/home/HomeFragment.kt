@@ -2,6 +2,7 @@ package com.ddd.nenamja.planv.presentation.home
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -19,6 +20,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel by viewModel<HomeViewModel>()
     private val sharedViewModel by sharedViewModel<MainViewModel>()
+
+    private var location = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +58,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         with(srl_refresh) {
             setOnRefreshListener {
                 isRefreshing = true
-                viewModel.resetVolunteerList()
+                viewModel.resetVolunteerList(location)
             }
         }
+        sharedViewModel.addressLocation.observe(viewLifecycleOwner, Observer { location ->
+            this.location = location
+            Log.d("ironelder", "home Location = $location")
+            viewModel.resetVolunteerList(location = location)
+        })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             pb_loading.visibility = if (isLoading == true) View.VISIBLE else View.GONE
         })
